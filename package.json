@@ -1,0 +1,20 @@
+{
+  "name": "dw-websitepessoal",
+  "version": "1.0.0",
+  "description": "Website pessoal desenvolvido no âmbito da cadeira de Desenvolvimento Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmonteiro18/dw-exercicio2.git"
+  },
+  "author": "Luís Monteiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmonteiro18/dw-exercicio2/issues"
+  },
+  "homepage": "https://github.com/lmonteiro18/dw-exercicio2#readme"
+}
