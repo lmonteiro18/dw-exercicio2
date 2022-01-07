@@ -125,6 +125,8 @@ function ProjectTitle(word, x, y, vx, vy, c) {
   this.y = y;
   this.vx = vx;
   this.vy = vy;
+  this.ax = 0;
+  this.ay = 0;
   this.c = c;
   let textHorizontalDimension = null;
   let textVerticalDimension = null;
@@ -169,10 +171,12 @@ function ProjectTitle(word, x, y, vx, vy, c) {
   }
 
   //APROXIMAR PROJETOS ADJACENTES A UM PROJETO QUE ESTEJA HOVERED
+  let raioEntreProjetosEstatico;
   this.goCloser = function(project) {
     let raioProjeto = dist(project.x, project.y, project.x + project.getTextHorizontal() / 2, project.y);
     let raioEntreProjetos = dist(this.x, this.y, project.x, project.y);
     if (approximate === false) {
+      raioEntreProjetosEstatico = dist(this.x, this.y, project.x, project.y);
       let declive;
       let b;
       if ((this.x >= project.x && this.y >= project.y) || (this.x >= project.x && this.y <= project.y)) { //1ºQuadrante e 4ºQuadrante
@@ -181,24 +185,38 @@ function ProjectTitle(word, x, y, vx, vy, c) {
         declive = (project.y - this.y) / (project.x - this.x);
       }
       //b = this.y - declive * this.x;
+      this.vx = 0;
+      this.vy = 0;
       if (declive <= 1 && declive >= -1) {
         if (this.x > project.x) {
-          this.vx = -4;
+          this.ax = 0.1;
         } else if (this.x < project.x) {
-          this.vx = 4;
+          this.ax = -0.1;
         }
-        this.vy = declive * this.vx;
+        this.ay = declive * this.ax;
       } else if (declive >= 1 || declive <= -1) {
         if (this.y > project.y) {
-          this.vy = -4;
+          this.ay = 0.1;
         } else if (this.y < project.y) {
-          this.vy = 4;
+          this.ay = -0.1;
         }
-        this.vx = this.vy / declive;
+        this.ax = this.ay / declive;
       }
       approximate = true;
     } else {
-      if (raioEntreProjetos > raioProjeto + 4) {
+      if (raioEntreProjetos > raioProjeto) {
+        if (raioEntreProjetos > raioProjeto + (raioEntreProjetosEstatico - raioProjeto) / 2) {
+          this.vx -= this.ax;
+          this.vy -= this.ay;
+        } else {
+          if (this.vx <= 0.25 && this.vx >= -0.25 && this.vy <= 0.25 && this.vy >= -0.25) {
+            this.vx = 0;
+            this.vy = 0;
+          } else {
+            this.vx += this.ax;
+            this.vy += this.ay;
+          }
+        }
         this.x = this.x + this.vx;
         this.y = this.y + this.vy;
       }
