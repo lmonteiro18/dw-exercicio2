@@ -63,9 +63,6 @@ function draw() {
         actualProject = i;
         projectBefore = projectNames.length - 1;
         projectAfter = i + 1;
-        /*console.log(isHovered);
-        console.log(projectBefore);
-        console.log(projectAfter);*/
       } else {
         if (i === actualProject) {
           ProjectTitles[projectBefore].setApproximate(false);
@@ -73,9 +70,6 @@ function draw() {
           actualProject = null;
           projectBefore = null;
           projectAfter = null;
-          /*console.log(isHovered);
-          console.log(projectBefore);
-          console.log(projectAfter);*/
         }
       }
     } else if (i === projectNames.length - 1) {
@@ -85,9 +79,6 @@ function draw() {
         actualProject = i;
         projectBefore = i - 1;
         projectAfter = 0;
-        /*console.log(isHovered);
-        console.log(projectBefore);
-        console.log(projectAfter);*/
       } else {
         if (i === actualProject) {
           ProjectTitles[projectBefore].setApproximate(false);
@@ -95,9 +86,6 @@ function draw() {
           actualProject = null;
           projectBefore = null;
           projectAfter = null;
-          /*console.log(isHovered);
-          console.log(projectBefore);
-          console.log(projectAfter);*/
         }
       }
     } else {
@@ -107,9 +95,6 @@ function draw() {
         actualProject = i;
         projectBefore = i - 1;
         projectAfter = i + 1;
-        /*console.log(isHovered);
-        console.log(projectBefore);
-        console.log(projectAfter);*/
       } else {
         if (i === actualProject) {
           ProjectTitles[projectBefore].setApproximate(false);
@@ -117,19 +102,13 @@ function draw() {
           actualProject = null;
           projectBefore = null;
           projectAfter = null;
-          /*console.log(isHovered);
-          console.log(projectBefore);
-          console.log(projectAfter);*/
         }
       }
     }
     if (i !== projectBefore && i !== projectAfter) {
-      //console.log(projectBefore, projectAfter);
       ProjectTitles[i].move();
     } else {
       ProjectTitles[i].goCloser(ProjectTitles[actualProject]);
-      console.log("Moving Project: " + i);
-      console.log("ActualProject: " + actualProject);
     }
   }
   vertex(ProjectTitles[0].x, ProjectTitles[0].y + 5);
@@ -209,8 +188,6 @@ function ProjectTitle(word, x, y, vx, vy, c) {
           this.vx = 4;
         }
         this.vy = declive * this.vx;
-        console.log(this.vx);
-        console.log(this.vy);
       } else if (declive >= 1 || declive <= -1) {
         if (this.y > project.y) {
           this.vy = -4;
@@ -218,8 +195,6 @@ function ProjectTitle(word, x, y, vx, vy, c) {
           this.vy = 4;
         }
         this.vx = this.vy / declive;
-        console.log(this.vx);
-        console.log(this.vy);
       }
       approximate = true;
     } else {
